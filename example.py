@@ -26,9 +26,9 @@ class MyRosbridgeClient(WebSocketClient):
 
 if __name__=="__main__":
      try:
-         ws = MyRosbridgeClient('ws://127.0.0.1:9090/')
+         ws = MyRosbridgeClient('ws://127.0.0.1:9090/')  #replace IP address with that of your robot
          ws.connect()
          ws.advertise_topic()
-         ws.move_to(0,0,90)
+         ws.move_to(0,0,90)     # coordinates x , y (meters) and theta (radians) are expressed in the map coordinate frame.
      except KeyboardInterrupt:
          ws.close()
