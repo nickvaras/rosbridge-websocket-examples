@@ -1,5 +1,5 @@
 from json import dumps
-from ws4py.client.threadedclient import WebSocketClient   # 'pip install ws4py' or see: https://ws4py.readthedocs.io/en/latest/sources/install/
+from ws4py.client.threadedclient import WebSocketClient   # 'pip install ws4py' or 'sudo apt-get install python-ws4py' .See: https://ws4py.readthedocs.io/en/latest/sources/install/
 from math import sin, cos
 
 class MyRosbridgeClient(WebSocketClient):
