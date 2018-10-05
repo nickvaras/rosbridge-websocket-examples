@@ -13,10 +13,17 @@ ws.goToWaypoint = function(waypointName){
 };
 
 ws.on('message', function(msg){
+    console.log(msg);
     let received_message  = JSON.parse(msg);
     switch(received_message.op){
         case 'service_response':
-            ws.publishGoal(msg);
+            switch(received_message.service){
+                case '/mission_control/stop_mission_file':
+                    console.log('Mission Stopped');
+                    break;
+                case '/waypoint_db/retrieve_waypoint':
+                    ws.publishGoal(msg);
+            }
             break;
         case 'publish':
             ws.robotLocation.y = received_message.msg.position.y;
@@ -33,7 +40,6 @@ ws.on('close', function() {
 });
 
 ws.publishGoal = function(msg){
-    console.log(msg);
     waypoint_coordinates  = JSON.parse(msg);
     x_coordinate = waypoint_coordinates.values.response.x;
     y_coordinate = waypoint_coordinates.values.response.y;
@@ -56,6 +62,11 @@ ws.cancelGoal = function(){
     }; 
     ws.send(JSON.stringify(pose_message));
 }
+
+ws.stopLoop = function(){
+    let stopLoopMsg ={"op":"call_service","service":"/mission_control/stop_mission_file","args":{"request":""}};
+    ws.send(JSON.stringify(stopLoopMsg));
+};
 
 ws.queryPosition = function(onOff){
     let op = "subscribe";
