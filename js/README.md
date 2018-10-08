@@ -23,3 +23,6 @@ To abort the current goal and stop the robot:
 
 ``myws.cancelGoal()``
 
+To run a program created in the Dispatcher User Interface:
+
+``myws.runMission('<the_name_that_I_saved_my_mission_with>)``
