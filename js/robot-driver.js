@@ -12,6 +12,11 @@ ws.goToWaypoint = function(waypointName){
     ws.send(JSON.stringify(request_coordinates_msg));
 };
 
+ws.runMission = function(missionName){
+    let request_mission_msg ={"op":"call_service","service":"/mission_control/run_mission_from_file","args":{"request":missionName}};
+    ws.send(JSON.stringify(request_mission_msg));
+};
+
 ws.on('message', function(msg){
     console.log(msg);
     let received_message  = JSON.parse(msg);
