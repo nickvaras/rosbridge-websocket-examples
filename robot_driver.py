@@ -15,6 +15,8 @@ class MyRosbridgeClient(WebSocketClient):
         self.waypoint_coordinates_y = None
         self.coordinates_message_received = False
         self.move_to_waypoint_when_coordinates_received = False
+        self.navigation_finished = False
+        self.navigation_succeeded = False
 
     def opened(self):
         print "Connection opened..."
@@ -29,6 +31,8 @@ class MyRosbridgeClient(WebSocketClient):
         print code, reason
 
     def move_to(self, x, y, z, w):
+        self.navigation_finished = False
+        self.navigation_succeeded = False
         msg = {'op': 'publish',
                'topic': '/move_base_navi_simple/goal',
                'msg':
@@ -70,9 +74,15 @@ class MyRosbridgeClient(WebSocketClient):
                     self.move_to(x_coordinate, y_coordinate, z_coordinate, w_coordinate)
 
         elif message['op'] == 'publish':
-            # update the robot position
-            self.robot_position_x = message['msg']['position']['x']
-            self.robot_position_y = message['msg']['position']['y']
+            if message['topic'] == "/move_base_navi/result":
+                self.navigation_finished = True
+                if message['msg']['status']['text'] == "Goal reached.":
+                    self.navigation_succeeded = True
+                
+            else:
+                # update the robot position
+                self.robot_position_x = message['msg']['position']['x']
+                self.robot_position_y = message['msg']['position']['y']
 
     def start_mission(self, mission_name):
         msg = {"op": "call_service",
@@ -88,6 +98,10 @@ class MyRosbridgeClient(WebSocketClient):
 
     def subscribe_to_robot_pose(self):
         msg = {"op": "subscribe", "topic": "/robot_pose"}
+        self.send(dumps(msg))
+
+    def subscribe_to_navigation_result(self):
+        msg = {"op": "subscribe", "topic": "/move_base_navi/result"}
         self.send(dumps(msg))
 
     def request_waypoint_coordinates(self, waypoint_name):

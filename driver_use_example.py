@@ -9,7 +9,11 @@ try:
     # This is an example script, uncomment relevant lines to try different functions
 
     """ Sending the robot to a waypoint:"""
+    my_websocket_client.subscribe_to_navigation_result()
     my_websocket_client.go_to_named_waypoint('Start')
+    while not my_websocket_client.navigation_finished:
+        time.sleep(0.1)
+    print("Navigation Succeeded: "+str(my_websocket_client.navigation_succeeded))
     
     """ Starting a mission/program"""
     #my_websocket_client.start_mission('start_nayan_x_3')
@@ -28,7 +32,7 @@ try:
     """ If you want this script to run forever, uncomment this """
     #my_websocket_client.run_forever()
     # or
-    time.sleep(5)
+    #time.sleep(25)
 
 except KeyboardInterrupt:
     my_websocket_client.close()
