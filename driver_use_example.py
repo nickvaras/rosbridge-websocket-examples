@@ -35,7 +35,10 @@ try:
     #time.sleep(25)
 
     """ The mission_is_running attribute keeps track of mission starts and finishes (this is experimental, do not use for production) """
-    #print(my_websocket_client.mission_is_running)
+    #timeout = 0
+    #while my_websocket_client.mission_is_running and timeout < 15:
+    #    time.sleep(1)
+    #    timeout = timeout + 1
 
 except KeyboardInterrupt:
     my_websocket_client.close()
