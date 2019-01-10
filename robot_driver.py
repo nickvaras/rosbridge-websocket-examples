@@ -90,6 +90,7 @@ class MyRosbridgeClient(WebSocketClient):
                 self.robot_position_y = message['msg']['position']['y']
 
     def start_mission(self, mission_name):
+        self.listen_for_mission_finish_message()
         msg = {"op": "call_service",
                "service": "/mission_control/run_mission_from_file",
                "args": {"request": mission_name}}
@@ -131,7 +132,3 @@ class MyRosbridgeClient(WebSocketClient):
         msg = {"op": "subscribe", "topic": "/mission_control/program_status"}
         self.send(dumps(msg))
         
-
-
-
-self.service_10 = rospy.Service('modbus_manager/set_digital_output',ModbusSetDigitalOutput, lambda req: self.set_digital_output(req.io_name, req.value))
