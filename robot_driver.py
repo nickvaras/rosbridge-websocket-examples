@@ -17,6 +17,7 @@ class MyRosbridgeClient(WebSocketClient):
         self.move_to_waypoint_when_coordinates_received = False
         self.navigation_finished = False
         self.navigation_succeeded = False
+        self.mission_is_running = False
 
     def opened(self):
         print "Connection opened..."
@@ -78,7 +79,11 @@ class MyRosbridgeClient(WebSocketClient):
                 self.navigation_finished = True
                 if message['msg']['status']['text'] == "Goal reached.":
                     self.navigation_succeeded = True
-                
+
+            elif message['topic'] == "/mission_control/program_status":
+                if message['msg']['data'] == "Program finished.":
+                    self.mission_is_running = False
+
             else:
                 # update the robot position
                 self.robot_position_x = message['msg']['position']['x']
@@ -89,6 +94,7 @@ class MyRosbridgeClient(WebSocketClient):
                "service": "/mission_control/run_mission_from_file",
                "args": {"request": mission_name}}
         self.send(dumps(msg))
+        self.mission_is_running = True
 
     def stop_mission(self):
         msg = {"op": "call_service",
@@ -120,4 +126,12 @@ class MyRosbridgeClient(WebSocketClient):
             sleep(0.15)
         self.coordinates_message_received = False
         return self.waypoint_coordinates_x, self.waypoint_coordinates_y
+
+    def listen_for_mission_finish_message(self):
+        msg = {"op": "subscribe", "topic": "/mission_control/program_status"}
+        self.send(dumps(msg))
         
+
+
+
+self.service_10 = rospy.Service('modbus_manager/set_digital_output',ModbusSetDigitalOutput, lambda req: self.set_digital_output(req.io_name, req.value))
