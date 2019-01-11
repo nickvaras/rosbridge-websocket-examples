@@ -131,4 +131,14 @@ class MyRosbridgeClient(WebSocketClient):
     def listen_for_mission_finish_message(self):
         msg = {"op": "subscribe", "topic": "/mission_control/program_status"}
         self.send(dumps(msg))
+
+    def set_digital_output(self, digital_output_name, digital_output_desired_state):
+        msg = {"op": "call_service",
+               "service": 'modbus_manager/set_digital_output',
+               "args":
+               {
+                   "io_name": digital_output_name,
+                   "value": digital_output_desired_state
+               }}
+        self.send(dumps(msg))
         
