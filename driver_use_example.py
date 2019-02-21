@@ -34,6 +34,9 @@ try:
     # or
     #time.sleep(25)
 
+    """ The robot's battery level is available on the battery_level attribute. """
+    print(my_websocket_client.battery_level)
+
     """ The mission_is_running attribute keeps track of mission starts and finishes (this is experimental, do not use for production) """
     #timeout = 0
     #while my_websocket_client.mission_is_running and timeout < 15:

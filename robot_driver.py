@@ -18,10 +18,12 @@ class MyRosbridgeClient(WebSocketClient):
         self.navigation_finished = False
         self.navigation_succeeded = False
         self.mission_is_running = False
+        self.battery_level = None
 
     def opened(self):
         print "Connection opened..."
         self.subscribe_to_robot_pose()
+        self.subscribe_to_battery_level()
 
     def advertise_topic(self):
         msg = {'op': 'advertise', 'topic': '/move_base_simple/goal',
@@ -84,6 +86,9 @@ class MyRosbridgeClient(WebSocketClient):
                 if message['msg']['data'] == "Program finished.":
                     self.mission_is_running = False
 
+            elif message['topic'] == "/waypoint/aux_battery_soc":
+                self.battery_level = message['msg']['data']
+
             else:
                 # update the robot position
                 self.robot_position_x = message['msg']['position']['x']
@@ -109,6 +114,10 @@ class MyRosbridgeClient(WebSocketClient):
 
     def subscribe_to_navigation_result(self):
         msg = {"op": "subscribe", "topic": "/move_base_navi/result"}
+        self.send(dumps(msg))
+
+    def subscribe_to_battery_level(self):
+        msg = {"op": "subscribe", "topic": "/waypoint/aux_battery_soc"}
         self.send(dumps(msg))
 
     def request_waypoint_coordinates(self, waypoint_name):
