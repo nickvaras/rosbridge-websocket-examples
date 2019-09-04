@@ -1,4 +1,4 @@
-# rosbridge-python-websocket-example
+# rosbridge-websocket-examples
 A set of bare-bones examples mini-drivers to control a mobile robot using rosbridge over websockets.
 
 This sample code is meant to demonstrate basic communication without using any special client library, although more sophisticated functionality can be achieved by means of thin client libraries like [roslibjs](http://wiki.ros.org/roslibjs) and [roslibpy](https://github.com/gramaziokohler/roslibpy).
