@@ -6,4 +6,4 @@ See driver_use_example.py for how-to use the driver
 ``python driver_use_example.py``
 
 Other than Python, it only requires the ws4py websocket library to be installed:
-pip install ws4py' or see: https://ws4py.readthedocs.io/en/latest/sources/install/
+`pip install ws4py` or see: <https://ws4py.readthedocs.io/en/latest/sources/install/>
