@@ -1,7 +1,7 @@
 # rosbridge-python-websocket-example
 A bare-bones example mini-driver to control a mobile robot using rosbridge over websockets, tested on Python 2.7
 
-See <driver_use_example.py> for how-to use the driver
+See [driver_use_example.py](https://github.com/nickvaras/rosbridge-websocket-examples/blob/master/python/driver_use_example.py) for how-to use the driver
 
 ``python driver_use_example.py``
 
