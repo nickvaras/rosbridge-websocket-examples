@@ -10,7 +10,7 @@ Rosbridge enables virtually any device to interact with a ROS system.
 The Rosbridge protocol specification is available [here](https://github.com/RobotWebTools/rosbridge_suite/blob/master/ROSBRIDGE_PROTOCOL.md).
 
 
-This example on a particular ROS robot with enabled websockets rosbridge, Vector by [Waypoint Robotics](http://waypointrobotics.com).
+While originally created for a [Waypoint Robotics](http://waypointrobotics.com) Vector robot, this example can be adapted to any robot using rosbridge.
 
 Inspired by
 https://github.com/Sanic/ROSBridgeTestclient 
