@@ -1,8 +1,8 @@
 # rosbridge-websocket-examples
 A set of bare-bones examples mini-drivers to control a mobile robot using rosbridge over websockets.
 
-For Python example, see python folder.
-for Javascript example, see js folder.
+For a Python example, see python folder.
+For Javascript examples, see js folder.
 
 Rosbridge enables virtually any device to interact with a ROS system.
 The Rosbridge protocol specification is available [here](https://github.com/RobotWebTools/rosbridge_suite/blob/master/ROSBRIDGE_PROTOCOL.md).
