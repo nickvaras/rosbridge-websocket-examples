@@ -1,9 +1,9 @@
 const WebSocket = require('ws');   // sudo npm i ws
-const ws = new WebSocket('ws://35.188.228.188:9090');
+const ws = new WebSocket('ws://35.199.36.232:9090');
 
 ws.on('open', function open() {
     console.log('New connection');
-    let request_coordinates_msg ={"op":"call_service","service":"/waypoint_db/retrieve_waypoint","args":{"mapName":"WebGen","waypointName": "Start"}};
+    let request_coordinates_msg ={"op":"call_service","service":"/waypoint_db/retrieve_waypoint","args":{"waypointName": "A"}};
     ws.send(JSON.stringify(request_coordinates_msg));
 });
 
