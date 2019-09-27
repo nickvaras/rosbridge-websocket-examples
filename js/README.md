@@ -1,4 +1,4 @@
-# rosbridge-javascript-websocket-example
+# JavaScript rosbridge websocket examples
 
 A few examples on how to control a robot over raw javascript websockets.
 
