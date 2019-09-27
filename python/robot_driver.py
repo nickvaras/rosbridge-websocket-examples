@@ -125,7 +125,6 @@ class MyRosbridgeClient(WebSocketClient):
                "service": '/waypoint_db/retrieve_waypoint',
                "args":
                {
-                   "mapName": 'WebGen',
                    "waypointName": waypoint_name
                }}
         self.send(dumps(msg))
